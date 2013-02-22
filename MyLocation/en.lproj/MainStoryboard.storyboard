@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="2">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+    </dependencies>
+    <scenes>
+        <!--My Location View Controller-->
+        <scene sceneID="5">
+            <objects>
+                <viewController id="2" customClass="MyLocationViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DBa-uH-W2D">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="aP7-4O-63i"/>
+                                </constraints>
+                                <attributedString key="attributedText">
+                                    <fragment content="Current Location">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.37647058823529411" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="24" name="Helvetica-Bold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Latitude" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="223-hR-bCd">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="FQw-ei-yug"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Longitude" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uet-oN-l0q">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWg-ju-f9O">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hsW-dQ-n0F">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="182" translatesAutoresizingMaskIntoConstraints="NO" id="X0E-yJ-Vxl">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="RYr-WV-5lc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqe-3E-OCh">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="172" id="IqX-hc-vPD"/>
+                                    <constraint firstAttribute="height" constant="35" id="Uxt-aA-2nJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Get Location">
+                                    <color key="titleColor" red="0.0" green="0.37647058820000001" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getCurrentLocation:" destination="2" eventType="touchUpInside" id="wTo-jW-xSv"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="cWg-ju-f9O" firstAttribute="top" secondItem="223-hR-bCd" secondAttribute="top" type="default" id="2r3-sb-UV2"/>
+                            <constraint firstItem="DBa-uH-W2D" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="3Rz-Q0-hIS"/>
+                            <constraint firstItem="223-hR-bCd" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="46Z-wE-Jmw"/>
+                            <constraint firstItem="223-hR-bCd" firstAttribute="top" secondItem="3" secondAttribute="top" constant="94" id="5nE-lB-lFB"/>
+                            <constraint firstAttribute="trailing" secondItem="DBa-uH-W2D" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="7w0-4c-cDr"/>
+                            <constraint firstItem="hsW-dQ-n0F" firstAttribute="top" secondItem="cWg-ju-f9O" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="8uS-G6-7rz"/>
+                            <constraint firstItem="cWg-ju-f9O" firstAttribute="leading" secondItem="223-hR-bCd" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="9BG-7I-qTU"/>
+                            <constraint firstItem="cWg-ju-f9O" firstAttribute="baseline" secondItem="223-hR-bCd" secondAttribute="baseline" type="default" id="9FX-V6-fnA"/>
+                            <constraint firstItem="DBa-uH-W2D" firstAttribute="centerX" secondItem="oqe-3E-OCh" secondAttribute="centerX" type="default" id="9Xa-CP-vEp"/>
+                            <constraint firstItem="hsW-dQ-n0F" firstAttribute="baseline" secondItem="uet-oN-l0q" secondAttribute="baseline" type="user" id="FQD-fz-SPw"/>
+                            <constraint firstItem="hsW-dQ-n0F" firstAttribute="leading" secondItem="cWg-ju-f9O" secondAttribute="leading" type="default" id="IKc-fv-OoJ"/>
+                            <constraint firstItem="hsW-dQ-n0F" firstAttribute="leading" secondItem="uet-oN-l0q" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="VoH-Gj-sNp"/>
+                            <constraint firstItem="X0E-yJ-Vxl" firstAttribute="top" secondItem="hsW-dQ-n0F" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Yln-c1-1oE"/>
+                            <constraint firstAttribute="trailing" secondItem="cWg-ju-f9O" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="ZbV-bH-rci"/>
+                            <constraint firstItem="DBa-uH-W2D" firstAttribute="top" secondItem="3" secondAttribute="top" constant="20" symbolic="YES" type="default" id="aqb-PR-Sj7"/>
+                            <constraint firstItem="uet-oN-l0q" firstAttribute="leading" secondItem="3" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="fMZ-Hc-vSj"/>
+                            <constraint firstAttribute="trailing" secondItem="hsW-dQ-n0F" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="gaD-W9-xuE"/>
+                            <constraint firstAttribute="bottom" secondItem="oqe-3E-OCh" secondAttribute="bottom" constant="114" id="gc8-p6-0bC"/>
+                            <constraint firstItem="uet-oN-l0q" firstAttribute="top" secondItem="223-hR-bCd" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="hSA-AN-rNI"/>
+                            <constraint firstItem="X0E-yJ-Vxl" firstAttribute="leading" secondItem="hsW-dQ-n0F" secondAttribute="leading" type="default" id="hnU-6B-Qqb"/>
+                            <constraint firstAttribute="trailing" secondItem="X0E-yJ-Vxl" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="jYN-mw-lQ3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="addressValue" destination="X0E-yJ-Vxl" id="6nE-uL-LLT"/>
+                        <outlet property="latitudeValue" destination="cWg-ju-f9O" id="eXu-8R-uND"/>
+                        <outlet property="longitudeValue" destination="hsW-dQ-n0F" id="Fec-im-DqI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-70" y="53"/>
+        </scene>
+    </scenes>
+    <classes>
+        <class className="MyLocationViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyLocationViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="getCurrentLocation:"/>
+                <relationship kind="outlet" name="addressValue" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="latitudeValue" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="longitudeValue" candidateClass="UILabel"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>
