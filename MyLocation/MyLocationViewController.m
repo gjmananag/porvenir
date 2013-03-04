@@ -18,7 +18,6 @@ NSMutableURLRequest* request;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
     
     locationManager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
@@ -33,6 +32,7 @@ NSMutableURLRequest* request;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+
     // Dispose of any resources that can be recreated.
 }
 

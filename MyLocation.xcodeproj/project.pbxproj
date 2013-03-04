@@ -19,6 +19,20 @@
 		8732742B1659DD760006CCF3 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873274291659DD760006CCF3 /* MainStoryboard.storyboard */; };
 		8732742E1659DD760006CCF3 /* MyLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8732742D1659DD760006CCF3 /* MyLocationViewController.m */; };
 		87327435165B12440006CCF3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87327434165B12440006CCF3 /* CoreLocation.framework */; };
+		873B011016DE9455007083E7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873B010F16DE9455007083E7 /* CFNetwork.framework */; };
+		873B012416DE9805007083E7 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011216DE9805007083E7 /* AFHTTPClient.m */; };
+		873B012516DE9805007083E7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011416DE9805007083E7 /* AFHTTPRequestOperation.m */; };
+		873B012616DE9805007083E7 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011616DE9805007083E7 /* AFImageRequestOperation.m */; };
+		873B012716DE9805007083E7 /* AFJSONRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011816DE9805007083E7 /* AFJSONRequestOperation.m */; };
+		873B012816DE9805007083E7 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011A16DE9805007083E7 /* AFNetworkActivityIndicatorManager.m */; };
+		873B012916DE9805007083E7 /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011D16DE9805007083E7 /* AFPropertyListRequestOperation.m */; };
+		873B012A16DE9805007083E7 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B011F16DE9805007083E7 /* AFURLConnectionOperation.m */; };
+		873B012B16DE9805007083E7 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B012116DE9805007083E7 /* AFXMLRequestOperation.m */; };
+		873B012C16DE9805007083E7 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 873B012316DE9805007083E7 /* UIImageView+AFNetworking.m */; };
+		875B3D0816DBBC0400B55F55 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 875B3D0716DBBC0400B55F55 /* Icon.png */; };
+		877E19A016DFDEBF00CF3224 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 877E199F16DFDEBF00CF3224 /* Message.m */; };
+		877E19A216E00B4B00CF3224 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877E19A116E00B4B00CF3224 /* MobileCoreServices.framework */; };
+		877E19A416E00B5700CF3224 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877E19A316E00B5700CF3224 /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +53,31 @@
 		8732742C1659DD760006CCF3 /* MyLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyLocationViewController.h; sourceTree = "<group>"; };
 		8732742D1659DD760006CCF3 /* MyLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyLocationViewController.m; sourceTree = "<group>"; };
 		87327434165B12440006CCF3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		873B010F16DE9455007083E7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		873B011116DE9805007083E7 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
+		873B011216DE9805007083E7 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
+		873B011316DE9805007083E7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
+		873B011416DE9805007083E7 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
+		873B011516DE9805007083E7 /* AFImageRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageRequestOperation.h; sourceTree = "<group>"; };
+		873B011616DE9805007083E7 /* AFImageRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageRequestOperation.m; sourceTree = "<group>"; };
+		873B011716DE9805007083E7 /* AFJSONRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFJSONRequestOperation.h; sourceTree = "<group>"; };
+		873B011816DE9805007083E7 /* AFJSONRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFJSONRequestOperation.m; sourceTree = "<group>"; };
+		873B011916DE9805007083E7 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
+		873B011A16DE9805007083E7 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
+		873B011B16DE9805007083E7 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
+		873B011C16DE9805007083E7 /* AFPropertyListRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFPropertyListRequestOperation.h; sourceTree = "<group>"; };
+		873B011D16DE9805007083E7 /* AFPropertyListRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFPropertyListRequestOperation.m; sourceTree = "<group>"; };
+		873B011E16DE9805007083E7 /* AFURLConnectionOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLConnectionOperation.h; sourceTree = "<group>"; };
+		873B011F16DE9805007083E7 /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
+		873B012016DE9805007083E7 /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
+		873B012116DE9805007083E7 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		873B012216DE9805007083E7 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
+		873B012316DE9805007083E7 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		875B3D0716DBBC0400B55F55 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		877E199E16DFDEBF00CF3224 /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		877E199F16DFDEBF00CF3224 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		877E19A116E00B4B00CF3224 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		877E19A316E00B5700CF3224 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +85,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				877E19A416E00B5700CF3224 /* SystemConfiguration.framework in Frameworks */,
+				877E19A216E00B4B00CF3224 /* MobileCoreServices.framework in Frameworks */,
+				873B011016DE9455007083E7 /* CFNetwork.framework in Frameworks */,
 				87327435165B12440006CCF3 /* CoreLocation.framework in Frameworks */,
 				873274121659DD760006CCF3 /* UIKit.framework in Frameworks */,
 				873274141659DD760006CCF3 /* Foundation.framework in Frameworks */,
@@ -59,6 +101,9 @@
 		873274021659DD760006CCF3 = {
 			isa = PBXGroup;
 			children = (
+				877E19A316E00B5700CF3224 /* SystemConfiguration.framework */,
+				877E19A116E00B4B00CF3224 /* MobileCoreServices.framework */,
+				873B010F16DE9455007083E7 /* CFNetwork.framework */,
 				87327434165B12440006CCF3 /* CoreLocation.framework */,
 				873274171659DD760006CCF3 /* MyLocation */,
 				873274101659DD760006CCF3 /* Frameworks */,
@@ -87,6 +132,27 @@
 		873274171659DD760006CCF3 /* MyLocation */ = {
 			isa = PBXGroup;
 			children = (
+				877E199E16DFDEBF00CF3224 /* Message.h */,
+				877E199F16DFDEBF00CF3224 /* Message.m */,
+				873B011116DE9805007083E7 /* AFHTTPClient.h */,
+				873B011216DE9805007083E7 /* AFHTTPClient.m */,
+				873B011316DE9805007083E7 /* AFHTTPRequestOperation.h */,
+				873B011416DE9805007083E7 /* AFHTTPRequestOperation.m */,
+				873B011516DE9805007083E7 /* AFImageRequestOperation.h */,
+				873B011616DE9805007083E7 /* AFImageRequestOperation.m */,
+				873B011716DE9805007083E7 /* AFJSONRequestOperation.h */,
+				873B011816DE9805007083E7 /* AFJSONRequestOperation.m */,
+				873B011916DE9805007083E7 /* AFNetworkActivityIndicatorManager.h */,
+				873B011A16DE9805007083E7 /* AFNetworkActivityIndicatorManager.m */,
+				873B011B16DE9805007083E7 /* AFNetworking.h */,
+				873B011C16DE9805007083E7 /* AFPropertyListRequestOperation.h */,
+				873B011D16DE9805007083E7 /* AFPropertyListRequestOperation.m */,
+				873B011E16DE9805007083E7 /* AFURLConnectionOperation.h */,
+				873B011F16DE9805007083E7 /* AFURLConnectionOperation.m */,
+				873B012016DE9805007083E7 /* AFXMLRequestOperation.h */,
+				873B012116DE9805007083E7 /* AFXMLRequestOperation.m */,
+				873B012216DE9805007083E7 /* UIImageView+AFNetworking.h */,
+				873B012316DE9805007083E7 /* UIImageView+AFNetworking.m */,
 				873274201659DD760006CCF3 /* MyLocationAppDelegate.h */,
 				873274211659DD760006CCF3 /* MyLocationAppDelegate.m */,
 				873274291659DD760006CCF3 /* MainStoryboard.storyboard */,
@@ -100,6 +166,7 @@
 		873274181659DD760006CCF3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				875B3D0716DBBC0400B55F55 /* Icon.png */,
 				873274191659DD760006CCF3 /* MyLocation-Info.plist */,
 				8732741A1659DD760006CCF3 /* InfoPlist.strings */,
 				8732741D1659DD760006CCF3 /* main.m */,
@@ -168,6 +235,7 @@
 				873274261659DD760006CCF3 /* Default@2x.png in Resources */,
 				873274281659DD760006CCF3 /* Default-568h@2x.png in Resources */,
 				8732742B1659DD760006CCF3 /* MainStoryboard.storyboard in Resources */,
+				875B3D0816DBBC0400B55F55 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +249,16 @@
 				8732741E1659DD760006CCF3 /* main.m in Sources */,
 				873274221659DD760006CCF3 /* MyLocationAppDelegate.m in Sources */,
 				8732742E1659DD760006CCF3 /* MyLocationViewController.m in Sources */,
+				873B012416DE9805007083E7 /* AFHTTPClient.m in Sources */,
+				873B012516DE9805007083E7 /* AFHTTPRequestOperation.m in Sources */,
+				873B012616DE9805007083E7 /* AFImageRequestOperation.m in Sources */,
+				873B012716DE9805007083E7 /* AFJSONRequestOperation.m in Sources */,
+				873B012816DE9805007083E7 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				873B012916DE9805007083E7 /* AFPropertyListRequestOperation.m in Sources */,
+				873B012A16DE9805007083E7 /* AFURLConnectionOperation.m in Sources */,
+				873B012B16DE9805007083E7 /* AFXMLRequestOperation.m in Sources */,
+				873B012C16DE9805007083E7 /* UIImageView+AFNetworking.m in Sources */,
+				877E19A016DFDEBF00CF3224 /* Message.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +293,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manana Gabriel (G667E4M6RL)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Manana Gabriel (G667E4M6RL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -230,6 +309,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "4778CF0B-E24C-4E9D-899E-957B277E3ACD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -253,7 +333,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4778CF0B-E24C-4E9D-899E-957B277E3ACD";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -268,7 +348,7 @@
 				GCC_PREFIX_HEADER = "MyLocation/MyLocation-Prefix.pch";
 				INFOPLIST_FILE = "MyLocation/MyLocation-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4778CF0B-E24C-4E9D-899E-957B277E3ACD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -276,10 +356,12 @@
 		873274331659DD760006CCF3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Manana Gabriel (G667E4M6RL)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MyLocation/MyLocation-Prefix.pch";
 				INFOPLIST_FILE = "MyLocation/MyLocation-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4778CF0B-E24C-4E9D-899E-957B277E3ACD";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
