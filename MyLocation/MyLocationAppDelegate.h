@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIWindow* window;
 
-- (void)sendPhoneNumber:(NSString *)udid;
+- (void)sendPhoneNumber:(NSString *)udid phoneNumber:(NSString *)pn;
+- (void)sendVerificationCode:(NSString *)udid verificationCode:(NSString *)vcode;
 
 @end

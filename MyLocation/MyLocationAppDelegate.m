@@ -74,7 +74,7 @@ NSString* machineName()
     [httpClient setParameterEncoding:AFFormURLParameterEncoding];
     
     NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"join", @"cmd",
+                            @"reg", @"cmd",
                             [udid copy], @"udid",
                             [token copy], @"token",
                             @"Apple", @"brand",
@@ -92,28 +92,31 @@ NSString* machineName()
      {
          NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Success %@", operation.responseString);
          
-         [self sendPhoneNumber:udid];
+         // TODO Ask the user for phone number
+         
+         [self sendPhoneNumber:udid phoneNumber:@"3208486363"];
      }
                               failure:^( AFHTTPRequestOperation* operation, NSError* error )
      {
          NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
+         UIAlertView* errorAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         [errorAlert show];
      }];
     
     [op start];
 }
 
-- (void)sendPhoneNumber:(NSString *)udid
+- (void)sendPhoneNumber:(NSString *)udid phoneNumber:(NSString *)pn
 {
-    // TODO Ask the user for phone number
-    
     NSURL* url = [NSURL URLWithString:SVR_URL];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient setParameterEncoding:AFFormURLParameterEncoding];
     
     NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"number", @"cmd",
+                            @"phn", @"cmd",
                             [udid copy], @"udid",
-                            @"3208486363", @"number",
+                            [pn copy], @"number",
                             nil];
     
     NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST"
@@ -125,10 +128,53 @@ NSString* machineName()
     [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
      {
          NSLog(@"sendPhoneNumber(): Success %@", operation.responseString);
+
+         // TODO Ask the user for verification code
+         
+         [self sendVerificationCode:udid verificationCode:@"011051"];
      }
                               failure:^( AFHTTPRequestOperation* operation, NSError* error )
      {
          NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
+         UIAlertView* errorAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         [errorAlert show];
+     }];
+    
+    [op start];
+}
+
+- (void)sendVerificationCode:(NSString *)udid verificationCode:(NSString *)vcode
+{
+    NSURL* url = [NSURL URLWithString:SVR_URL];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [httpClient setParameterEncoding:AFFormURLParameterEncoding];
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"vcc", @"cmd",
+                            [udid copy], @"udid",
+                            [vcode copy], @"ccode",
+                            nil];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST"
+                                                            path:@"/services/reg"
+                                                      parameters:params];
+    
+    AFHTTPRequestOperation* op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
+     {
+         NSLog(@"sendPhoneNumber(): Success %@", operation.responseString);
+         UIAlertView* okAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Error" message:@"Congrats, your phone number has been verified!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         [okAlert show];
+     }
+                              failure:^( AFHTTPRequestOperation* operation, NSError* error )
+     {
+         NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
+         UIAlertView* errorAlert = [[UIAlertView alloc]
+                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+         [errorAlert show];
      }];
     
     [op start];
