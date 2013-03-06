@@ -12,6 +12,8 @@
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 
+#define SVR_URL @"http://198.74.54.196/"
+
 @implementation MyLocationAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -59,15 +61,15 @@ NSString* machineName()
 	token = [token stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
 	token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     
+    NSString* model = machineName();
     NSString* osv = [[UIDevice currentDevice] systemVersion];
     
     NSLog(@"My udid is: %@", udid);
     NSLog(@"My token is: %@", token);
+    NSLog(@"My model is: %@", model);
     NSLog(@"My osv is: %@", osv);
 
-    // TODO Ask the user for phone number
-    
-    NSURL* url = [NSURL URLWithString:@"http://198.74.54.196/"];
+    NSURL* url = [NSURL URLWithString:SVR_URL];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     [httpClient setParameterEncoding:AFFormURLParameterEncoding];
     
@@ -76,7 +78,7 @@ NSString* machineName()
                             [udid copy], @"udid",
                             [token copy], @"token",
                             @"Apple", @"brand",
-                            machineName(), @"model",
+                            [model copy], @"model",
                             [osv copy], @"os",
                             nil];
     
@@ -87,13 +89,47 @@ NSString* machineName()
     AFHTTPRequestOperation* op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
     
     [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
-    {
-        NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Success %@", operation.responseString);
-    }
-        failure:^( AFHTTPRequestOperation* operation, NSError* error )
-    {
-        NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
-    }];
+     {
+         NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Success %@", operation.responseString);
+         
+         [self sendPhoneNumber:udid];
+     }
+                              failure:^( AFHTTPRequestOperation* operation, NSError* error )
+     {
+         NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
+     }];
+    
+    [op start];
+}
+
+- (void)sendPhoneNumber:(NSString *)udid
+{
+    // TODO Ask the user for phone number
+    
+    NSURL* url = [NSURL URLWithString:SVR_URL];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    [httpClient setParameterEncoding:AFFormURLParameterEncoding];
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"number", @"cmd",
+                            [udid copy], @"udid",
+                            @"3208486363", @"number",
+                            nil];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST"
+                                                            path:@"/services/reg"
+                                                      parameters:params];
+    
+    AFHTTPRequestOperation* op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
+     {
+         NSLog(@"sendPhoneNumber(): Success %@", operation.responseString);
+     }
+                              failure:^( AFHTTPRequestOperation* operation, NSError* error )
+     {
+         NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
+     }];
     
     [op start];
 }
