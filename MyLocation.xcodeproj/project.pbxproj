@@ -33,6 +33,7 @@
 		877E19A016DFDEBF00CF3224 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 877E199F16DFDEBF00CF3224 /* Message.m */; };
 		877E19A216E00B4B00CF3224 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877E19A116E00B4B00CF3224 /* MobileCoreServices.framework */; };
 		877E19A416E00B5700CF3224 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 877E19A316E00B5700CF3224 /* SystemConfiguration.framework */; };
+		87FD98ED16E7EA550082E236 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 87FD98EC16E7EA550082E236 /* MBProgressHUD.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,8 @@
 		877E199F16DFDEBF00CF3224 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		877E19A116E00B4B00CF3224 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		877E19A316E00B5700CF3224 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		87FD98EB16E7EA550082E236 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		87FD98EC16E7EA550082E236 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +135,8 @@
 		873274171659DD760006CCF3 /* MyLocation */ = {
 			isa = PBXGroup;
 			children = (
+				87FD98EB16E7EA550082E236 /* MBProgressHUD.h */,
+				87FD98EC16E7EA550082E236 /* MBProgressHUD.m */,
 				877E199E16DFDEBF00CF3224 /* Message.h */,
 				877E199F16DFDEBF00CF3224 /* Message.m */,
 				873B011116DE9805007083E7 /* AFHTTPClient.h */,
@@ -259,6 +264,7 @@
 				873B012B16DE9805007083E7 /* AFXMLRequestOperation.m in Sources */,
 				873B012C16DE9805007083E7 /* UIImageView+AFNetworking.m in Sources */,
 				877E19A016DFDEBF00CF3224 /* Message.m in Sources */,
+				87FD98ED16E7EA550082E236 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

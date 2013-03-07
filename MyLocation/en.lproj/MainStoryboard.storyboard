@@ -17,7 +17,7 @@
                                     <constraint firstAttribute="height" constant="45" id="aP7-4O-63i"/>
                                 </constraints>
                                 <attributedString key="attributedText">
-                                    <fragment content="Current Location v1.0">
+                                    <fragment content="1Block v0.4">
                                         <attributes>
                                             <color key="NSColor" red="0.0" green="0.37647058823529411" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                                             <font key="NSFont" size="24" name="Helvetica-Bold"/>
@@ -112,20 +112,6 @@
             <point key="canvasLocation" x="-70" y="53"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="MyLocationViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MyLocationViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="getCurrentLocation:"/>
-                <relationship kind="outlet" name="addressValue" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="latitudeValue" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="longitudeValue" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

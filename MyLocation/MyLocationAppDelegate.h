@@ -3,7 +3,7 @@
 //  MyLocation
 //
 //  Created by Gabriel Mañana on 11/18/12.
-//  Copyright (c) 2012 Monitoreo. All rights reserved.
+//  Copyright (c) 2012 1Block. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -3,17 +3,23 @@
 //  MyLocation
 //
 //  Created by Gabriel Mañana on 11/18/12.
-//  Copyright (c) 2012 Monitoreo. All rights reserved.
+//  Copyright (c) 2012 1Block. All rights reserved.
 //
 
 #import "MyLocationViewController.h"
+#import "AFHTTPClient.h"
+#import "AFHTTPRequestOperation.h"
 
 @implementation MyLocationViewController
+
+@synthesize latitudeValue;
+@synthesize longitudeValue;
+@synthesize addressValue;
 
 CLLocationManager* locationManager;
 CLGeocoder* geocoder;
 CLPlacemark* placemark;
-NSMutableURLRequest* request;
+MBProgressHUD* hud;
 
 - (void)viewDidLoad
 {
@@ -21,12 +27,6 @@ NSMutableURLRequest* request;
     
     locationManager = [[CLLocationManager alloc] init];
     geocoder = [[CLGeocoder alloc] init];
-    
-    request = [[NSMutableURLRequest alloc]
-               initWithURL:[NSURL
-                            URLWithString:@"http://ungrid.unal.edu.co/ls"]];
-
-    [request setHTTPMethod:@"POST"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +38,16 @@ NSMutableURLRequest* request;
 
 - (IBAction)getCurrentLocation:(id)sender {
 
+    hud = [[MBProgressHUD alloc] initWithView:self.view];
+    hud.delegate = self;
+    hud.labelText = @"Uploading";
+	hud.detailsLabelText = @"location data";
+    hud.mode = MBProgressHUDModeIndeterminate;
+	hud.square = YES;
+    
+    [self.view addSubview:hud];
+    [hud show:YES];
+    
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
@@ -59,24 +69,24 @@ NSMutableURLRequest* request;
     NSLog(@"didUpdateToLocation: %@", newLocation);
     CLLocation* currentLocation = newLocation;
     
-    if (currentLocation != nil) {
+    if ( currentLocation != nil ) {
         
         // stop location manager
         if ( true ) {
             [locationManager stopUpdatingLocation];
         }
         
-        _longitudeValue.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.longitude];
-        _latitudeValue.text = [NSString stringWithFormat:@"%.8f", currentLocation.coordinate.latitude];
+        longitudeValue.text = [NSString stringWithFormat:@"%.12f", currentLocation.coordinate.longitude];
+        latitudeValue.text = [NSString stringWithFormat:@"%.12f", currentLocation.coordinate.latitude];
 
-        // reverse geocoding
+        // reverse geocoding //////////////////////////////////////////////////////////////////////////////////////////
         if ( false ) {
             NSLog(@"Resolving the Address");
             [geocoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray* placemarks, NSError* error) {
                 NSLog(@"Found placemarks: %@, error: %@", placemarks, error);
                 if (error == nil && [placemarks count] > 0) {
                     placemark = [placemarks lastObject];
-                    _addressValue.text = [NSString
+                    addressValue.text = [NSString
                                           stringWithFormat:@"%@ %@\n%@ %@\n%@\n%@",
                                           placemark.subThoroughfare,
                                           placemark.thoroughfare,
@@ -90,32 +100,60 @@ NSMutableURLRequest* request;
                 }
             } ];
         }
+        // reverse geocoding //////////////////////////////////////////////////////////////////////////////////////////
         
-        NSString* post = [NSString stringWithFormat:@"cmd=store&lat=%.8f&lon=%.8f",
-                          currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
-        NSData* postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-        NSString* postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSURL* url = [NSURL URLWithString:@"http://ungrid.unal.edu.co"];
+        AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
         
-        [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-        [request setHTTPBody:postData];
+        [httpClient setParameterEncoding:AFFormURLParameterEncoding];
         
-        NSURLConnection* conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-        if ( conn ) {
-            
-        }
-        else {
-            UIAlertView* errorAlert = [[UIAlertView alloc]
-                                       initWithTitle:@"Error" message:@"Can't connect to server" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [errorAlert show];
-        }
+        NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                                @"store", @"cmd",
+                                [latitudeValue.text copy], @"lat",
+                                [longitudeValue.text copy], @"lon",
+                                nil];
+        
+        NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST"
+                                                                path:@"/ls"
+                                                          parameters:params];
+        
+        AFHTTPRequestOperation* op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        
+        [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
+         {
+             NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Success %@", operation.responseString);
+             [hud hide:YES];
+             
+             UIAlertView* okAlert = [[UIAlertView alloc]
+                                        initWithTitle:@"Message" message:@"Your location has been successfully stored." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [okAlert show];
+         }
+                                  failure:^( AFHTTPRequestOperation* operation, NSError* error )
+         {
+             NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
+             [hud hide:YES];
+             
+             UIAlertView* errorAlert = [[UIAlertView alloc]
+                                        initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [errorAlert show];
+         }];
+        
+        [op start];
     }
     else {
         
-        _longitudeValue.text = @"N/A";
-        _latitudeValue.text = @"N/A";
-        _addressValue.text = @"N/A";
+        longitudeValue.text = @"N/A";
+        latitudeValue.text = @"N/A";
+        addressValue.text = @"N/A";
     }
+}
+#pragma mark -
+#pragma mark MBProgressHUDDelegate methods
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+	
+	[hud removeFromSuperview];
+	hud = nil;
 }
 
 @end

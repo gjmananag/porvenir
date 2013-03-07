@@ -3,7 +3,7 @@
 //  MyLocation
 //
 //  Created by Gabriel Mañana on 11/18/12.
-//  Copyright (c) 2012 Monitoreo. All rights reserved.
+//  Copyright (c) 2012 1Block. All rights reserved.
 //
 
 #import <sys/utsname.h>
@@ -13,6 +13,7 @@
 #import "AFHTTPRequestOperation.h"
 
 #define SVR_URL @"http://198.74.54.196/"
+#define VERIFIED @"250"
 
 @implementation MyLocationAppDelegate
 
@@ -71,6 +72,7 @@ NSString* machineName()
 
     NSURL* url = [NSURL URLWithString:SVR_URL];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
     [httpClient setParameterEncoding:AFFormURLParameterEncoding];
     
     NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -99,6 +101,7 @@ NSString* machineName()
                               failure:^( AFHTTPRequestOperation* operation, NSError* error )
      {
          NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
+    
          UIAlertView* errorAlert = [[UIAlertView alloc]
                                     initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
@@ -136,6 +139,7 @@ NSString* machineName()
                               failure:^( AFHTTPRequestOperation* operation, NSError* error )
      {
          NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
+         
          UIAlertView* errorAlert = [[UIAlertView alloc]
                                     initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
@@ -164,14 +168,19 @@ NSString* machineName()
     
     [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
      {
-         NSLog(@"sendPhoneNumber(): Success %@", operation.responseString);
-         UIAlertView* okAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Error" message:@"Congrats, your phone number has been verified!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-         [okAlert show];
+         NSLog(@"sendVerificationCode(): Success %@", operation.responseString);
+         
+         if ( [operation.responseString isEqualToString:VERIFIED] ) {
+             
+             UIAlertView* okAlert = [[UIAlertView alloc]
+                                     initWithTitle:@"Message" message:@"Congrats, your phone number has been verified!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [okAlert show];
+         }
      }
                               failure:^( AFHTTPRequestOperation* operation, NSError* error )
      {
-         NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
+         NSLog(@"sendVerificationCode(): Error: %@", error.localizedDescription);
+         
          UIAlertView* errorAlert = [[UIAlertView alloc]
                                     initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
