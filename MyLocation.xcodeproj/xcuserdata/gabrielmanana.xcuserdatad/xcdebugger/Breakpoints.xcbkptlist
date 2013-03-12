@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "MyLocation/MyLocationViewController.h"
-         timestampString = "384304030.119084"
+         timestampString = "384730574.07416"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
+         startingLineNumber = "25"
+         endingLineNumber = "25"
          landmarkName = "@interface MyLocationViewController"
          landmarkType = "2">
       </FileBreakpoint>

@@ -16,6 +16,10 @@
 @property (weak, nonatomic) IBOutlet UILabel* longitudeValue;
 @property (weak, nonatomic) IBOutlet UILabel* addressValue;
 
+@property CLLocationManager* locationManager;
+@property CLGeocoder* geocoder;
+@property CLPlacemark* placemark;
+
 - (IBAction)getCurrentLocation:(id)sender;
 
 @end

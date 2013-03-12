@@ -8,16 +8,30 @@
 
 #import <sys/utsname.h>
 #import "MyLocationAppDelegate.h"
-#import "Message.h"
 #import "AFHTTPClient.h"
 #import "AFHTTPRequestOperation.h"
 
 #define SVR_URL @"http://198.74.54.196/"
 #define VERIFIED @"250"
+#define LOCATION 9
 
 @implementation MyLocationAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+@synthesize locationManager;
+
+-(id)init
+{
+    self = [super init];
+    if ( self ) {
+        
+        locationManager = [[CLLocationManager alloc] init];
+    }
+    
+    return self;
+}
+
+- (BOOL)application:(UIApplication *)application
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Let the device know we want to receive push notifications
 	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:
@@ -25,11 +39,11 @@
     
     if ( launchOptions != nil )
 	{
-		NSDictionary* dictionary = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-		if ( dictionary != nil )
+		NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+		if ( userInfo != nil )
 		{
-			NSLog(@"Launched from push notification: %@", dictionary);
-			[self processRemoteNotification:dictionary updateUI:NO];
+			NSLog( @"Launched from push notification: %@", userInfo );
+			[self processRemoteNotification:userInfo updateUI:NO];
 		}
         else
         {
@@ -41,18 +55,26 @@
         NSLog(@"Launched from push notification: NULL launchOptions");
     }
     
+    NSInteger bn = [[UIApplication sharedApplication] applicationIconBadgeNumber];
+    if ( bn == LOCATION ) {
+   
+        [self getCurrentLocation];
+        [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    }
+    
     return YES;
 }
 
 NSString* machineName()
 {
     struct utsname systemInfo;
-    uname(&systemInfo);
+    uname( &systemInfo );
     
     return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 }
 
-- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     UIDevice* device = [UIDevice currentDevice];
 	NSUUID* uuid = device.identifierForVendor;
@@ -103,14 +125,16 @@ NSString* machineName()
          NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
     
          UIAlertView* errorAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil
+                                    cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
      }];
     
     [op start];
 }
 
-- (void)sendPhoneNumber:(NSString *)udid phoneNumber:(NSString *)pn
+- (void)sendPhoneNumber:(NSString *)udid
+            phoneNumber:(NSString *)pn
 {
     NSURL* url = [NSURL URLWithString:SVR_URL];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -141,14 +165,16 @@ NSString* machineName()
          NSLog(@"sendPhoneNumber(): Error: %@", error.localizedDescription);
          
          UIAlertView* errorAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil
+                                    cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
      }];
     
     [op start];
 }
 
-- (void)sendVerificationCode:(NSString *)udid verificationCode:(NSString *)vcode
+- (void)sendVerificationCode:(NSString *)udid
+            verificationCode:(NSString *)vcode
 {
     NSURL* url = [NSURL URLWithString:SVR_URL];
     AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -173,7 +199,8 @@ NSString* machineName()
          if ( [operation.responseString isEqualToString:VERIFIED] ) {
              
              UIAlertView* okAlert = [[UIAlertView alloc]
-                                     initWithTitle:@"Message" message:@"Congrats, your phone number has been verified!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                     initWithTitle:@"Message" message:@"Congrats, your phone number has been verified!"
+                                     delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
              [okAlert show];
          }
      }
@@ -182,7 +209,8 @@ NSString* machineName()
          NSLog(@"sendVerificationCode(): Error: %@", error.localizedDescription);
          
          UIAlertView* errorAlert = [[UIAlertView alloc]
-                                    initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                    initWithTitle:@"Error" message:error.localizedDescription
+                                    delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
          [errorAlert show];
      }];
     
@@ -194,23 +222,113 @@ NSString* machineName()
 	NSLog(@"Failed to get token, error: %@", error);
 }
 
-- (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
+- (void)application:(UIApplication*)application
+didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
 	NSLog(@"Received notification: %@", userInfo);
 	[self processRemoteNotification:userInfo updateUI:YES];
 }
 
-- (void)processRemoteNotification:(NSDictionary*)userInfo updateUI:(BOOL)updateUI
+- (void)processRemoteNotification:(NSDictionary *)userInfo
+                         updateUI:(BOOL)updateUI
 {
-	Message* message = [[Message alloc] init];
-	message.date = [NSDate date];
+    NSDictionary* aps = [userInfo objectForKey:@"aps"];
+    NSNumber* badge = [aps objectForKey:@"badge"];
     
-	if ( updateUI )
-	{
+	if ( badge != nil ) {
+        
+        if ( [badge integerValue] == LOCATION ) {
+            
+            [self getCurrentLocation];
+        }
     }
-    else
-	{
+    else {
     }
+    
+	if ( updateUI ) {
+    }
+    else {
+    }
+}
+
+- (void)getCurrentLocation {
+    
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    
+    [locationManager startUpdatingLocation];
+}
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+    didUpdateToLocation:(CLLocation *)newLocation
+           fromLocation:(CLLocation *)oldLocation
+{
+    // 1st: stop location manager
+    [locationManager stopUpdatingLocation];
+    
+    if ( newLocation != nil ) {
+    
+        NSLog(@"didUpdateToLocation(new): %@", newLocation);
+        
+        if ( oldLocation == nil || [newLocation distanceFromLocation:oldLocation] > 10 ) {
+        
+            [self sendLocation:newLocation];
+        }
+    }
+    else {
+        // try again
+    }
+}
+
+- (BOOL)sendLocation:(CLLocation *)curLocation
+{
+    BOOL r = TRUE;
+
+    UIDevice* device = [UIDevice currentDevice];
+	NSUUID* uuid = device.identifierForVendor;
+    NSString* udid = [uuid.UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
+
+    NSString* lon = [NSString stringWithFormat:@"%.15f", curLocation.coordinate.longitude];
+    NSString* lat = [NSString stringWithFormat:@"%.15f", curLocation.coordinate.latitude];
+    
+    NSURL* url = [NSURL URLWithString:SVR_URL];
+    AFHTTPClient* httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    [httpClient setParameterEncoding:AFFormURLParameterEncoding];
+    
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"store", @"cmd",
+                            [udid copy], @"udid",
+                            [lat copy], @"lat",
+                            [lon copy], @"lon",
+                            nil];
+    
+    NSMutableURLRequest* request = [httpClient requestWithMethod:@"POST"
+                                                            path:@"/services/loc"
+                                                      parameters:params];
+    
+    AFHTTPRequestOperation* op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    
+    [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
+     {
+         NSLog(@"locationManager(): Success %@", operation.responseString);
+     }
+                              failure:^( AFHTTPRequestOperation* operation, NSError* error )
+     {
+         NSLog(@"locationManager(): Error: %@", error.localizedDescription);
+     }];
+    
+    [op start];
+    
+    return r;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

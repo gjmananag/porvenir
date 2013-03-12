@@ -15,10 +15,10 @@
 @synthesize latitudeValue;
 @synthesize longitudeValue;
 @synthesize addressValue;
+@synthesize locationManager;
+@synthesize geocoder;
+@synthesize placemark;
 
-CLLocationManager* locationManager;
-CLGeocoder* geocoder;
-CLPlacemark* placemark;
 MBProgressHUD* hud;
 
 - (void)viewDidLoad
@@ -121,7 +121,7 @@ MBProgressHUD* hud;
         
         [op setCompletionBlockWithSuccess:^( AFHTTPRequestOperation* operation, id responseObject )
          {
-             NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Success %@", operation.responseString);
+             NSLog(@"locationManager(): Success %@", operation.responseString);
              [hud hide:YES];
              
              UIAlertView* okAlert = [[UIAlertView alloc]
@@ -130,7 +130,7 @@ MBProgressHUD* hud;
          }
                                   failure:^( AFHTTPRequestOperation* operation, NSError* error )
          {
-             NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken(): Error: %@", error.localizedDescription);
+             NSLog(@"locationManager(): Error: %@", error.localizedDescription);
              [hud hide:YES];
              
              UIAlertView* errorAlert = [[UIAlertView alloc]
@@ -147,6 +147,7 @@ MBProgressHUD* hud;
         addressValue.text = @"N/A";
     }
 }
+
 #pragma mark -
 #pragma mark MBProgressHUDDelegate methods
 

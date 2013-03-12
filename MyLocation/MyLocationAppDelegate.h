@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface MyLocationAppDelegate : UIResponder <UIApplicationDelegate>
+@interface MyLocationAppDelegate : UIResponder <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow* window;
+@property CLLocationManager* locationManager;
 
 - (void)sendPhoneNumber:(NSString *)udid phoneNumber:(NSString *)pn;
 - (void)sendVerificationCode:(NSString *)udid verificationCode:(NSString *)vcode;
+- (void)getCurrentLocation;
+- (BOOL)sendLocation:(CLLocation *)curLocation;
 
 @end
